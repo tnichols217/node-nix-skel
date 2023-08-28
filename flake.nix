@@ -35,7 +35,7 @@
             filtered = pkgs.callPackage ./nix/filter.pkg.nix { file = app; inherit name; };
             docker = pkgs.callPackage ./nix/docker.pkg.nix { app = filtered; inherit name; };
             node = app;
-            default = docker;
+            default = filtered;
           };
           apps = rec {
             dev = {
@@ -58,6 +58,6 @@
           };
         });
     in
-    dream2nixOut;
-    # nixpkgs.lib.recursiveUpdate dream2nixOut customOut;
+    # dream2nixOut;
+    nixpkgs.lib.recursiveUpdate dream2nixOut customOut;
 }
