@@ -1,0 +1,21 @@
+{
+  "_generic": {
+    "defaultPackage": "node-nix-skel",
+    "invalidationHash": "ab1076efc6c9f52f5fb04ee0bb073e100504c3d37fc076d581dfc1fa93de701f",
+    "location": "",
+    "packages": {
+      "node-nix-skel": "unknown"
+    },
+    "sourcesAggregatedHash": null,
+    "subsystem": "nodejs"
+  },
+  "_subsystem": {
+    "meta": {
+      "license": []
+    },
+    "nodejsVersion": "14"
+  },
+  "cyclicDependencies": {},
+  "dependencies": {},
+  "sources": {}
+}

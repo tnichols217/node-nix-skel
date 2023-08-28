@@ -7,7 +7,7 @@
       url = "github:hercules-ci/gitignore.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dream2nix.url = "github:nix-community/dream2nix";
+    dream2nix.url = "github:nix-community/dream2nix/legacy";
   };
 
   outputs = { self, nixpkgs, flake-utils, dream2nix, gitignore }:
