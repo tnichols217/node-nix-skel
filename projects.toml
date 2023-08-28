@@ -2,7 +2,7 @@
 name = "node-nix-skel"
 relPath = ""
 subsystem = "nodejs"
-translator = "package-json"
-translators = [ "package-lock", "package-json",]
+translator = "package-lock"
+translators = [ "package-lock",]
 
 [node-nix-skel.subsystemInfo]

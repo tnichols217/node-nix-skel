@@ -21,7 +21,7 @@
           projects = ./projects.toml;
           settings = [
             {
-              subsystemInfo.nodejs = 18;
+              subsystemInfo.nodejs = 20;
             }
           ];
         };
@@ -58,6 +58,6 @@
           };
         });
     in
-    # dream2nixOut;
-    nixpkgs.lib.recursiveUpdate dream2nixOut customOut;
+    dream2nixOut;
+    # nixpkgs.lib.recursiveUpdate dream2nixOut customOut;
 }
