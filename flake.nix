@@ -31,6 +31,10 @@
         lib.genAttrs packageModuleNames
         (moduleName: callModule "${./packages}/${moduleName}/module.nix");
 
+      dream2nixOut = {
+        packages = packages;
+      };
+
       # customOut = flake-utils.lib.eachDefaultSystem (system:
       #   let
       #     name = "node-nix-skel";
