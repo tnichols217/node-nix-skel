@@ -12,19 +12,25 @@
 
   outputs = { self, nixpkgs, flake-utils, dream2nix, gitignore }:
     let
-      dream2nixOut = 
-        dream2nix.lib.makeFlakeOutputs {
-          systems = flake-utils.lib.defaultSystems;
-          config.projectRoot = ./.;
-          source = gitignore.lib.gitignoreSource ./.;
-          # autoProjects = true;
-          projects = ./projects.toml;
-          settings = [
-            {
-              subsystemInfo.nodejs = 20;
-            }
-          ];
+      nixpkgs = import dream2nix.inputs.nixpkgs {};
+      lib = nixpkgs.lib;
+
+      _callModule = module:
+        nixpkgs.lib.evalModules {
+          specialArgs.dream2nix = dream2nix;
+          specialArgs.packageSets.nixpkgs = nixpkgs;
+          modules = [module ./settings.nix dream2nix.modules.dream2nix.core];
         };
+
+      # like callPackage for modules
+      callModule = module: (_callModule module).config.public;
+
+      packageModuleNames = builtins.attrNames (builtins.readDir ./packages);
+
+      packages =
+        lib.genAttrs packageModuleNames
+        (moduleName: callModule "${./packages}/${moduleName}/module.nix");
+
       customOut = flake-utils.lib.eachDefaultSystem (system:
         let
           name = "node-nix-skel";

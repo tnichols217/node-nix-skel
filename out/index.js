@@ -1,3 +1,0 @@
-// src/index.ts
-console.log("Hello, World!");
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiLi4vc3JjL2luZGV4LnRzIl0sCiAgInNvdXJjZXNDb250ZW50IjogWyJjb25zb2xlLmxvZyhcIkhlbGxvLCBXb3JsZCFcIikiXSwKICAibWFwcGluZ3MiOiAiO0FBQUEsUUFBUSxJQUFJLGVBQWU7IiwKICAibmFtZXMiOiBbXQp9Cg==
