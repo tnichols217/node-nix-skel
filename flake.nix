@@ -31,39 +31,39 @@
         lib.genAttrs packageModuleNames
         (moduleName: callModule "${./packages}/${moduleName}/module.nix");
 
-      customOut = flake-utils.lib.eachDefaultSystem (system:
-        let
-          name = "node-nix-skel";
-          pkgs = nixpkgs.legacyPackages.${system};
-          app = dream2nixOut.packages."${system}"."${name}";
-        in with pkgs; {
-          packages = rec {
-            filtered = pkgs.callPackage ./nix/filter.pkg.nix { file = app; inherit name; };
-            docker = pkgs.callPackage ./nix/docker.pkg.nix { app = filtered; inherit name; };
-            node = app;
-            default = filtered;
-          };
-          apps = rec {
-            dev = {
-              type = "app";
-              program = ./nix/scripts/dev.sh;
-            };
-            devProd = {
-              type = "app";
-              program = ./nix/scripts/devProd.sh;
-            };
-            start = {
-              type = "app";
-              program = ./nix/scripts/start.sh;
-            };
-            build = {
-              type = "app";
-              program = ./nix/scripts/build.sh;
-            };
-            default = dev;
-          };
-        });
+      # customOut = flake-utils.lib.eachDefaultSystem (system:
+      #   let
+      #     name = "node-nix-skel";
+      #     pkgs = nixpkgs.legacyPackages.${system};
+      #     app = dream2nixOut.packages."${system}"."${name}";
+      #   in with pkgs; {
+      #     packages = rec {
+      #       filtered = pkgs.callPackage ./nix/filter.pkg.nix { file = app; inherit name; };
+      #       docker = pkgs.callPackage ./nix/docker.pkg.nix { app = filtered; inherit name; };
+      #       node = app;
+      #       default = filtered;
+      #     };
+      #     apps = rec {
+      #       dev = {
+      #         type = "app";
+      #         program = ./nix/scripts/dev.sh;
+      #       };
+      #       devProd = {
+      #         type = "app";
+      #         program = ./nix/scripts/devProd.sh;
+      #       };
+      #       start = {
+      #         type = "app";
+      #         program = ./nix/scripts/start.sh;
+      #       };
+      #       build = {
+      #         type = "app";
+      #         program = ./nix/scripts/build.sh;
+      #       };
+      #       default = dev;
+      #     };
+      #   });
     in
-    # dream2nixOut;
-    nixpkgs.lib.recursiveUpdate dream2nixOut customOut;
+    dream2nixOut;
+    # nixpkgs.lib.recursiveUpdate dream2nixOut customOut;
 }
