@@ -14,11 +14,10 @@
   version = "1.0.0";
 
   deps = {nixpkgs, ...}: {
-    stdenv = nixpkgs.stdenv;
-    # inherit
-    #   (nixpkgs)
-    #   stdenv
-    #   ;
+    inherit
+      (nixpkgs)
+      stdenv
+      ;
   };
 
   mkDerivation = {

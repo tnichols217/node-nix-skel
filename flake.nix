@@ -13,7 +13,6 @@
   outputs = { self, nixpkgs, flake-utils, dream2nix, gitignore }:
     let
 
-
       customOut = flake-utils.lib.eachDefaultSystem (system:
         let
           name = "node-nix-skel";
@@ -42,12 +41,27 @@
           };
 
         in with pkgs; {
+
+          devShells = rec {
+            node = pkgs.mkShell {
+              nativeBuildInputs = [
+              ];
+              buildInputs = [
+                nodejs_20
+                nodePackages.npm
+                nodePackages.yarn
+                esbuild
+                nodePackages.typescript
+              ];
+            };
+            default = node;
+          };
           packages = rec {
             ${name} = packages.${name};
             filtered = pkgs.callPackage ./nix/filter.pkg.nix { file = packages.${name}; inherit name; };
             docker = pkgs.callPackage ./nix/docker.pkg.nix { app = filtered; inherit name; };
             node = packages.${name};
-            default = node;
+            default = filtered;
           };
           apps = rec {
             dev = {
